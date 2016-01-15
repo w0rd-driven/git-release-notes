@@ -1,0 +1,7 @@
+<% commits.forEach(function (commit) { %>
+* [__<%= commit.title %>__](<%= hashUrl %>/<%= commit.sha1 %>)
+
+    <%= commit.authorName %> - <%= commit.committerDate %>
+    
+    <%= commit.messageLines.length > 0 && commit.messageLines.join("\n    ") %>
+<% }) %>
