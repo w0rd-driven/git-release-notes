@@ -17,7 +17,7 @@ var argv = require("optimist").usage("release-notes [<options>] <since>..<until>
     })
     .options("h", {
         "alias" : "hash",
-        "default" : "http://github.com/FareCompare/blog/commit/"
+        "default" : "https://github.com/w0rd-driven/git-release-notes/commit/"
     })
     .options("b", {
         "alias" : "branch",
@@ -28,8 +28,8 @@ var argv = require("optimist").usage("release-notes [<options>] <since>..<until>
         "default" : ""
     })
     .describe({
-        "r" : "Filter out msgs that include the string)",
-        "h" : "Base url for showing commit diff (commit hash appeneded to url)",
+        "r" : "Filter out msgs that include the string",
+        "h" : "Base url for showing commit diff (commit hash appended to url)",
         "f" : "Configuration file",
         "p" : "Git project path",
         "t" : "Commit title regular expression",
@@ -77,7 +77,7 @@ fs.readFile(template, function (err, templateContent) {
             }, function (commits) {
                 if ( options.r.length > 0 ) {
                     commits = commits.filter( function(commit) {
-                        return commit.title.indexOf('maven-jgitflow') == -1;
+                        return commit.title.indexOf(options.r) === -1;
                     } );
                 }
                 var output = ejs.render(templateContent.toString(), {
